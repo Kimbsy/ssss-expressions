@@ -5,6 +5,7 @@
             [quip.sprites.button :as qpbutton]
             [quip.scene :as qpscene]
             [quip.sprite :as qpsprite]
+            [quip.tween :as qptween]
             [quip.utils :as qpu]))
 
 (defn title-sprites
@@ -61,11 +62,51 @@
                            :content-color common/white
                            :on-click on-click-quit)])
 
+(defn popup-tween
+  []
+  (qptween/->tween
+   :pos
+   400
+   :easing-fn qptween/asymptotic-easing-fn
+   :update-fn (fn [[x y] d]
+                [x (- y d)])
+   :yoyo? true
+   :yoyo-update-fn (fn [[x y] d]
+                     [x (+ y d)])
+   :on-complete-fn (fn [s]
+                     (qptween/add-tween s (popup-tween)))))
+
+(defn popdown-tween
+  []
+  (qptween/->tween
+   :pos
+   600
+   :step-count 140
+   :easing-fn qptween/asymptotic-easing-fn
+   :update-fn (fn [[x y] d]
+                [x (+ y d)])
+   :yoyo? true
+   :yoyo-update-fn (fn [[x y] d]
+                     [x (- y d)])
+   :on-complete-fn (fn [s]
+                     (qptween/add-tween s (popdown-tween)))))
+
 (defn theatrical-snakes
   []
-  [(snake/theatrical-snake :green
-                           [(* 0.2 (q/width))
-                            (* 0.9 (q/height))])])
+  [(qptween/add-tween
+    (snake/theatrical-snake :green
+                            [(* 0.2 (q/width))
+                             (* 1.5 (q/height))])
+    (popup-tween))
+   (qptween/add-tween
+    (snake/theatrical-snake :orange
+                            [(* 0.8 (q/width))
+                             (* -0.8 (q/height))]
+                            :rotation 180)
+    (-> (popdown-tween)
+        ;; (assoc :yoyoing? true)
+        ;; (assoc :progress 150)
+        ))])
 
 (defn draw-menu
   [state]
@@ -75,7 +116,8 @@
 (defn update-menu
   [state]
   (-> state
-      qpscene/update-scene-sprites))
+      qpscene/update-scene-sprites
+      qptween/update-sprite-tweens))
 
 (defn sprites
   []

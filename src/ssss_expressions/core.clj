@@ -14,7 +14,7 @@
 
 (defn setup
   []
- #_ (qpsound/loop-music "music/8bit Romance Loopable.wav")
+  (qpsound/loop-music "music/Romantic_and_Triumphant_Victory.wav")
   {:default-font (q/create-font "font/UbuntuMono-Regular.ttf" qpu/default-text-size)
    :giant-font   (q/create-font "font/UbuntuMono-Regular.ttf" 250)})
 
@@ -37,7 +37,7 @@
     :size           [1000 800]
     :setup          setup
     :init-scenes-fn init-scenes
-    :current-scene  :menu}))
+    :current-scene  :level-01}))
 
 (defn -main
   [& args]
