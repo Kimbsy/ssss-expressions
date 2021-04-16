@@ -34,6 +34,7 @@
 (def ssss-expressions-game
   (qp/game
    {:title          "Ssss Expressions"
+    :size           [1000 800]
     :setup          setup
     :init-scenes-fn init-scenes
     :current-scene  :menu}))
