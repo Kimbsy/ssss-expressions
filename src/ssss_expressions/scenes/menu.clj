@@ -73,8 +73,7 @@
    :yoyo? true
    :yoyo-update-fn (fn [[x y] d]
                      [x (+ y d)])
-   :on-complete-fn (fn [s]
-                     (qptween/add-tween s (popup-tween)))))
+   :repeat-times ##Inf))
 
 (defn popdown-tween
   []
@@ -103,10 +102,7 @@
                             [(* 0.8 (q/width))
                              (* -0.8 (q/height))]
                             :rotation 180)
-    (-> (popdown-tween)
-        ;; (assoc :yoyoing? true)
-        ;; (assoc :progress 150)
-        ))])
+    (popdown-tween))])
 
 (defn draw-menu
   [state]

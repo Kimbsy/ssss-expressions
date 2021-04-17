@@ -37,7 +37,7 @@
     :size           [1000 800]
     :setup          setup
     :init-scenes-fn init-scenes
-    :current-scene  :level-01}))
+    :current-scene  :menu}))
 
 (defn -main
   [& args]
