@@ -10,7 +10,7 @@
   (qpu/background common/grey)
   (qpscene/draw-scene-sprites state)
 
-  ;; (qpu/stroke common/orange)
+  ;; (qpu/stroke common/light-green)
   ;; (q/stroke-weight 5)
 
   ;; (q/no-fill)

@@ -25,7 +25,7 @@
 
 (defn on-click-play
   [state e]
-  (qpscene/transition state :level-01
+  (qpscene/transition state :intro
                       :transition-length 30
                       :init-fn (fn [state]
                                  state)))
@@ -95,13 +95,15 @@
   [(qptween/add-tween
     (snake/theatrical-snake :green
                             [(* 0.2 (q/width))
-                             (* 1.5 (q/height))])
+                             (* 1.5 (q/height))]
+                            :current-animation :tongue)
     (popup-tween))
    (qptween/add-tween
     (snake/theatrical-snake :orange
                             [(* 0.8 (q/width))
                              (* -0.8 (q/height))]
-                            :rotation 180)
+                            :rotation 180
+                            :current-animation :tongue)
     (popdown-tween))])
 
 (defn draw-menu
@@ -121,9 +123,14 @@
           (buttons)
           (theatrical-snakes)))
 
+(defn delays
+  []
+  [])
+
 (defn init
   []
   {:sprites (sprites)
+   :delays (delays)
    :draw-fn draw-menu
    :update-fn update-menu
    :mouse-pressed-fns [qpbutton/handle-buttons-pressed]

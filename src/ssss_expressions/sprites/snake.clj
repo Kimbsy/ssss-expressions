@@ -39,7 +39,7 @@
   [{[x y] :pos
     :keys [body]
     :as s}]
-  (qpu/stroke common/orange)
+  (qpu/stroke common/light-green)
   (q/no-fill)
   (q/stroke-weight 5)
   (q/begin-shape)
@@ -71,9 +71,12 @@
           pos]})
 
 (defn theatrical-snake
-  [color pos & {:keys [rotation] :or {rotation 0}}]
+  [color pos &
+   {:keys [rotation current-animation]
+    :or {rotation 0
+         current-animation :none}}]
   (qpsprite/animated-sprite
-   :theatrical-snake
+   (keyword (str (name color) "-snake"))
    pos
    192
    384
@@ -84,7 +87,7 @@
                 :tongue {:frames 5
                          :y-offset 1
                          :frame-delay 4}}
-   :current-animation :tongue
+   :current-animation current-animation
    :rotation rotation))
 
 (defn update-snake
