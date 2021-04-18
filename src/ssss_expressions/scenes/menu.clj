@@ -4,6 +4,7 @@
             [quil.core :as q]
             [quip.sprites.button :as qpbutton]
             [quip.scene :as qpscene]
+            [quip.sound :as qpsound]
             [quip.sprite :as qpsprite]
             [quip.tween :as qptween]
             [quip.utils :as qpu]))
@@ -28,6 +29,8 @@
   (qpscene/transition state :intro
                       :transition-length 30
                       :init-fn (fn [state]
+                                 (qpsound/stop-music)
+                                 (qpsound/loop-music "music/Chansssse_Encounter.wav")
                                  state)))
 
 (defn on-click-credits

@@ -10,10 +10,9 @@
                      (qpu/direction-vector rotation))))
 
 
-;; @TODO: when we're not turning we shouldn't add new body vertices, just move the last one
 (defn update-body
   [{:keys [body pos] :as s}]
-  (update s :body conj pos))
+  (update s :body  (fn [ps] (conj (vec (rest ps)) pos))))
 
 (defn update-player-snake
   [s]

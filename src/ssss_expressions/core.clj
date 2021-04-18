@@ -14,7 +14,7 @@
 
 (defn setup
   []
-#_  (qpsound/loop-music "music/Romantic_and_Triumphant_Victory.wav")
+  (qpsound/loop-music "music/Menu_Music_w_breaks.wav")
   {:default-font (q/create-font "font/UbuntuMono-Regular.ttf" qpu/default-text-size)
    :giant-font   (q/create-font "font/UbuntuMono-Regular.ttf" 250)})
 

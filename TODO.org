@@ -5,6 +5,11 @@
 *** need to have multiple levels where we collect gifts with different restrictions
 ** TODO create outro cutscene
 ** TODO add music
+*** DONE menu
+*** DONE intro
+*** TODO levels
+*** TODO outro
+*** TODO credits
 ** TODO create credits scene
 ** TODO sync menu snakes to menu music
 *** initial delay + yoyoing tween of specified step-count
