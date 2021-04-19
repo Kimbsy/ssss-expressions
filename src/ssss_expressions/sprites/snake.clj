@@ -12,7 +12,15 @@
 
 (defn update-body
   [{:keys [body pos] :as s}]
-  (update s :body  (fn [ps] (conj (vec (rest ps)) pos))))
+  (let [p0 (last body) ; the snake shoulders
+        dv (map - pos p0) ; delta between shoulders and head
+        p-new (map + p0 (map #(/ % 2) dv))]
+    (if (< 80 (qpu/magnitude dv))
+      (update s :body  (fn [ps]
+                         ;; (pop (conj ps p-new #_pos)) ; limited length
+                         (conj ps p-new #_pos) ; unlimited length
+                         ))
+      s)))
 
 (defn update-player-snake
   [s]
@@ -35,22 +43,36 @@
   (apply q/line x y (project-point s)))
 
 (defn draw-player-snake
-  [{[x y] :pos
-    :keys [body]
+  [{[x y :as pos] :pos
+    :keys [body
+           rotation]
     :as s}]
   (qpu/stroke common/light-green)
+
+  ;; @TODO: mess around with the fill here
   (q/no-fill)
+
+  ;; draw the body
   (q/stroke-weight 5)
   (q/begin-shape)
-  (apply q/curve-vertex (first body))
+  (apply q/curve-vertex (peek body))
   (doseq [p body]
     (apply q/curve-vertex p))
-  (apply q/curve-vertex (project-point s))
+  (apply q/curve-vertex pos)
+  (apply q/curve-vertex pos)
   (q/end-shape)
 
-
-  (draw-debug s)
-  )
+  ;; draw the head
+  (q/stroke-weight 1)
+  (qpu/fill common/light-green)
+  (qpu/wrap-trans-rot
+   pos rotation
+   (fn []
+     (q/rect -5 0 10 -20 5)
+     (qpu/stroke common/grey)
+     (qpu/fill common/grey)
+     (q/rect 2 -14 2 2)
+     (q/rect -4 -14 2 2))))
 
 (defn player-snake
   [[x y :as pos]]
@@ -63,11 +85,9 @@
    :update-fn update-player-snake
    :draw-fn draw-player-snake
    :bounds-fn (constantly false) ; ... this is gonna take some thinking
-   :body [[(- x 150) (- y 80)]
-          [(- x 80) (- y 40)]
-          [(- x 40) (- y 80)]
-          [(- x 40) (- y 40)]
-          pos]})
+   :body (apply conj clojure.lang.PersistentQueue/EMPTY
+               pos
+               (for [i (range 10)] pos))})
 
 (defn theatrical-snake
   [color pos &
