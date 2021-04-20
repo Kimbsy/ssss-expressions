@@ -4,6 +4,13 @@
             [quip.utils :as qpu]
             [ssss-expressions.common :as common]))
 
+(defn body-intersects-w-h-rect
+  [{:keys [body pos]} {[x y] :pos}]
+  (let [smaller-rect {:pos [(- x 10) (- y 10)] :w 15 :h 15}]
+    (some
+     #(common/line-intersects-rect? % smaller-rect)
+     (partition 2 1 (conj body pos)))))
+
 (defn update-vel
   [{:keys [rotation vel] :as s}]
   (assoc s :vel (map #(* (qpu/magnitude vel) %)
@@ -71,7 +78,13 @@
      (qpu/stroke common/grey)
      (qpu/fill common/grey)
      (q/rect 2 -14 2 2)
-     (q/rect -4 -14 2 2))))
+     (q/rect -4 -14 2 2)))
+
+  ;; draw the body segments
+  ;; (qpu/stroke qpu/red)
+  ;; (doseq [[a b] (partition 2 1 (conj body pos))]
+  ;;   (q/line a b))
+  )
 
 (defn player-snake
   [[x y :as pos]]

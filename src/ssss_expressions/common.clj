@@ -1,4 +1,5 @@
-(ns ssss-expressions.common)
+(ns ssss-expressions.common
+  (:require [quip.utils :as qpu]))
 
 (def palette ["85ffc7" "297373" "ff8552" "e6e6e6"
               "39393a" "bd4089" "bd80a5" "33658a"
@@ -14,3 +15,14 @@
 (def dark-blue [51 101 138])
 (def light-blue [134 187 216])
 (def highlight-blue [158 218 250])
+
+(defn line-intersects-rect?
+  [line
+   {[x1 y1] :pos :keys [w h]}]
+  (let [x2 (+ x1 w)
+        y2 (+ y1 h)]
+    (some (partial qpu/lines-intersect? line)
+          [[[x1 y1] [x2 y1]]
+           [[x2 y1] [x2 y1]]
+           [[x2 y2] [x1 y2]]
+           [[x1 y2] [x1 y1]]])))
