@@ -1,15 +1,19 @@
 * Things to do:
-** TODO implement better snake movement
-** TODO figure out how to grab items
+** TODO create mouse sprite
+** TODO figure out how to grab mice
+*** think we might just end up with autograbbing on collision
+** TODO make orange flipped sprite just alternative animations
 ** TODO Come up with levels
 *** need to have multiple levels where we collect gifts with different restrictions
+*** got an idea about this, see physical notes
 ** TODO create outro cutscene
+** TODO create credits scene
+** TODO sync menu snakes to menu music
+*** initial delay + yoyoing tween of specified step-count
 ** TODO add music
 *** DONE menu
 *** DONE intro
 *** TODO levels
 *** TODO outro
 *** TODO credits
-** TODO create credits scene
-** TODO sync menu snakes to menu music
-*** initial delay + yoyoing tween of specified step-count
+** DONE implement better snake movement

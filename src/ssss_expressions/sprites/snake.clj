@@ -15,19 +15,20 @@
   (let [p0 (last body) ; the snake shoulders
         dv (map - pos p0) ; delta between shoulders and head
         p-new (map + p0 (map #(/ % 2) dv))]
-    (if (< 80 (qpu/magnitude dv))
+    (if (< 40 (qpu/magnitude dv))
       (update s :body  (fn [ps]
-                         ;; (pop (conj ps p-new #_pos)) ; limited length
-                         (conj ps p-new #_pos) ; unlimited length
-                         ))
+                         (pop (conj ps p-new))))
       s)))
 
 (defn update-player-snake
-  [s]
-  (-> s
-      (qpsprite/update-pos)
-      update-vel
-      update-body))
+  [s {:keys [held-keys]}]
+  (if (or (held-keys :right)
+          (held-keys :left))
+    (-> s
+        (qpsprite/update-pos)
+        update-vel
+        update-body)
+    s))
 
 (defn project-point
   [{[x y :as pos] :pos
@@ -49,10 +50,8 @@
     :as s}]
   (qpu/stroke common/light-green)
 
-  ;; @TODO: mess around with the fill here
-  (q/no-fill)
-
   ;; draw the body
+  (q/no-fill)
   (q/stroke-weight 5)
   (q/begin-shape)
   (apply q/curve-vertex (peek body))

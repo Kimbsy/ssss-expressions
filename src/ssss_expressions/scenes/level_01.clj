@@ -8,32 +8,21 @@
 (defn draw-level-01
   [state]
   (qpu/background common/grey)
-  (qpscene/draw-scene-sprites state)
+  (qpscene/draw-scene-sprites state))
 
-  ;; (qpu/stroke common/light-green)
-  ;; (q/stroke-weight 5)
-
-  ;; (q/no-fill)
-
-  ;; (q/begin-shape)
-  ;; (q/curve-vertex 0 0)
-  ;; (q/curve-vertex 0 0)
-  ;; (q/curve-vertex 100 100)
-  ;; (q/curve-vertex 200 100)
-  ;; (q/curve-vertex 300 100)
-  ;; (q/curve-vertex (q/mouse-x) (q/mouse-y))
-  ;; (q/curve-vertex (q/mouse-x) (q/mouse-y))
-
-  ;; (q/end-shape)
-
-
-,  )
+(defn update-scene-sprites-with-context
+  [{:keys [current-scene] :as state}]
+  (update-in state [:scenes current-scene :sprites]
+             (fn [sprites]
+               (map (fn [s]
+                      ((:update-fn s) s state))
+                    sprites))))
 
 (defn update-level-01
   [state]
   (-> state
-      (qpscene/update-scene-sprites)
-      (snake/handle-direction-input)))
+      update-scene-sprites-with-context
+      snake/handle-direction-input))
 
 (defn sprites
   []
