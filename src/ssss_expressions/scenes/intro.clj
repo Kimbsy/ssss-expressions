@@ -91,7 +91,7 @@
                (map (fn [s]
                       (if (= :orange-snake (:sprite-group s))
                         (-> s
-                            (assoc :spritesheet (q/load-image "img/snake/orange-flipped.png"))
+                            (qpsprite/set-animation :none-flipped)
                             (update :pos (fn [[x y]] [(- x 150) y])))
                         s))
                     sprites))))
@@ -103,7 +103,7 @@
              (fn [sprites]
                (map (fn [s]
                       (if (= :orange-snake (:sprite-group s))
-                        (qpsprite/set-animation s :tongue)
+                        (qpsprite/set-animation s :tongue-flipped)
                         s))
                     sprites))))
 
@@ -113,7 +113,7 @@
              (fn [sprites]
                (map (fn [s]
                       (if (= :orange-snake (:sprite-group s))
-                        (qpsprite/set-animation s :none)
+                        (qpsprite/set-animation s :none-flipped)
                         s))
                     sprites))))
 
@@ -150,7 +150,7 @@
                       (if (= :orange-snake (:sprite-group s))
                         (-> s
                             (qptween/add-tween (laughing-tween))
-                            (qpsprite/set-animation :tongue))
+                            (qpsprite/set-animation :tongue-flipped))
                         s))
                     sprites))))
 
@@ -161,7 +161,7 @@
                (map (fn [s]
                       (if (= :orange-snake (:sprite-group s))
                         (-> s
-                            (assoc :spritesheet (q/load-image "img/snake/orange.png"))
+                            (qpsprite/set-animation :none)
                             (update :pos (fn [[x y]] [(+ x 150) y])))
                         s))
                     sprites))))

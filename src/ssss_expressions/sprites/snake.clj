@@ -86,7 +86,7 @@
    :bounds-fn (constantly false) ; ... this is gonna take some thinking
    :body (apply conj clojure.lang.PersistentQueue/EMPTY
                pos
-               (for [i (range 10)] pos))})
+               (for [i (range 20)] pos))})
 
 (defn theatrical-snake
   [color pos &
@@ -104,7 +104,13 @@
                          :frame-delay 100}
                 :tongue {:frames 5
                          :y-offset 1
-                         :frame-delay 4}}
+                         :frame-delay 4}
+                :none-flipped   {:frames      1
+                                 :y-offset    2
+                                 :frame-delay 100}
+                :tongue-flipped {:frames 5
+                                 :y-offset 3
+                                 :frame-delay 4}}
    :current-animation current-animation
    :rotation rotation))
 

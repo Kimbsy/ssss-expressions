@@ -2,7 +2,6 @@
 ** TODO create mouse sprite
 ** TODO figure out how to grab mice
 *** think we might just end up with autograbbing on collision
-** TODO make orange flipped sprite just alternative animations
 ** TODO Come up with levels
 *** need to have multiple levels where we collect gifts with different restrictions
 *** got an idea about this, see physical notes
@@ -16,4 +15,5 @@
 *** TODO levels
 *** TODO outro
 *** TODO credits
+** DONE make orange flipped sprite just alternative animations
 ** DONE implement better snake movement
