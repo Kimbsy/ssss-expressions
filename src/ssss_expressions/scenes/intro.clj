@@ -229,7 +229,7 @@
 (defn finish
   [state]
   (qpscene/transition state :level-01
-                      :transition-length 30
+                      :transition-length 80
                       :init-fn (fn [state]
                                  state)))
 
@@ -252,11 +252,11 @@
                 [5 green-hiss]
                 [40 orange-stop-hiss]
                 [0 green-stop-hiss]
-                [30 green-laugh]
-                [0 orange-laugh]
-                [40 green-stop-hiss]
-                [0 orange-stop-hiss]
-                [80 orange-hiss]
+                [30 orange-laugh]
+                [0 green-laugh]
+                [40 orange-stop-hiss]
+                [0 green-stop-hiss]
+                [160 orange-hiss]
                 [40 orange-stop-hiss]
                 [60 orange-turn-back]
                 [40 orange-leave-right]

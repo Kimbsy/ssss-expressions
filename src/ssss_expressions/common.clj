@@ -18,9 +18,12 @@
 
 (defn line-intersects-rect?
   [line
-   {[x1 y1] :pos :keys [w h]}]
+   {[x1 y1] :pos :keys [w h rotation]}]
   (let [x2 (+ x1 w)
-        y2 (+ y1 h)]
+        y2 (+ y1 h)
+
+
+        ]
     (some (partial qpu/lines-intersect? line)
           [[[x1 y1] [x2 y1]]
            [[x2 y1] [x2 y1]]
