@@ -20,6 +20,7 @@
   (qptween/->tween
    :alpha
    -255
+   :step-count 180
    :easing-fn qptween/exponential-easing-fn
    :on-complete-fn common/flag-for-removal))
 

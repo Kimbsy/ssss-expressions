@@ -44,7 +44,7 @@
       state)))
 
 (defn add-sprites-to-scene-delay
-  [new-sprites d]
+  [d new-sprites]
   (->delay
    d
    (fn [{:keys [current-scene] :as state}]

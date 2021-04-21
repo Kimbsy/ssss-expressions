@@ -265,8 +265,7 @@
                 [60 bubble-1]
                 [60 bubble-2]
                 [80 present]
-                [200 finish]
-                ]]
+                [200 finish]]]
     (:ds (reduce (fn [{:keys [ds curr] :as acc}
                       [d f]]
                    (-> acc
@@ -281,12 +280,4 @@
   {:sprites []
    :delays (delays)
    :update-fn update-intro
-   :draw-fn draw-intro
-   ;; :key-pressed-fns [(fn [state e]
-   ;;                     (when (= 32 (:key-code e))
-   ;;                       (prn (:global-frame state)))
-   ;;                     state)]
-   ;; :mouse-pressed-fns [(fn [state e]
-   ;;                       (prn ((juxt :x :y) e))
-   ;;                       state)]
-   })
+   :draw-fn draw-intro})

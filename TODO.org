@@ -1,12 +1,15 @@
 * Things to do:
-** TODO Come up with levels
-*** need to have multiple levels where we collect gifts with different restrictions
-*** got an idea about this, see physical notes
 ** TODO create between-level score scene
 ** TODO create outro cutscene
 ** TODO create credits scene
 ** TODO sync menu snakes to menu music
 *** initial delay + yoyoing tween of specified step-count
+** TODO Come up with levels
+*** need to have multiple levels collecting rats with different restrictions/patterns
+*** DONE level 1
+*** TODO level 2
+*** TODO level 3
+*** TODO level 4
 ** TODO add music
 *** DONE menu
 *** DONE intro

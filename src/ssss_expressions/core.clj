@@ -9,8 +9,10 @@
             [ssss-expressions.scenes.credits :as credits]
             [ssss-expressions.scenes.intro :as intro]
             [ssss-expressions.scenes.level-01 :as level-01]
+            [ssss-expressions.scenes.level-02 :as level-02]
             [ssss-expressions.scenes.menu :as menu]
-            [ssss-expressions.scenes.outro :as outro]))
+            [ssss-expressions.scenes.outro :as outro]
+            [ssss-expressions.scenes.scoring :as scoring]))
 
 (defn setup
   []
@@ -23,8 +25,10 @@
   {:menu     (menu/init)
    :intro    (intro/init)
    :level-01 (level-01/init)
+   :level-02 (level-02/init)
    :outro    (outro/init)
-   :credits  (credits/init)})
+   :credits  (credits/init)
+   :scoring  (scoring/init)})
 
 (defn cleanup
   [state]
