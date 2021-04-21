@@ -1,10 +1,8 @@
 * Things to do:
-** TODO get rats moving
-*** DONE get them stopping when caught
-*** TODO get them to follow paths
 ** TODO Come up with levels
 *** need to have multiple levels where we collect gifts with different restrictions
 *** got an idea about this, see physical notes
+** TODO create between-level score scene
 ** TODO create outro cutscene
 ** TODO create credits scene
 ** TODO sync menu snakes to menu music
@@ -15,6 +13,13 @@
 *** TODO levels
 *** TODO outro
 *** TODO credits
+** DONE get rats moving
+*** DONE get them stopping when caught
+*** DONE get them to follow paths
+**** just tweening their velocity with sigmoidal easing functions.
+*** DONE telegraph incoming rats
+** DONE create hazard indicator sprites
+*** can we just do geometric? might be easier for tweening alpha
 ** DONE figure out how to grab rats
 *** DONE autograbbing on collision
 *** DONE update rat animations appropriately

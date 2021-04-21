@@ -42,3 +42,11 @@
             (assoc-in path unfinished)
             (apply-all (map :on-complete-fn finished))))
       state)))
+
+(defn add-sprites-to-scene-delay
+  [new-sprites d]
+  (->delay
+   d
+   (fn [{:keys [current-scene] :as state}]
+     (update-in state [:scenes current-scene :sprites]
+                concat new-sprites))))

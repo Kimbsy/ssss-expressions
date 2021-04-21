@@ -6,6 +6,8 @@
             [quip.tween :as qptween]
             [quip.utils :as qpu]
             [ssss-expressions.common :as common]
+            [ssss-expressions.delay :as delay]
+            [ssss-expressions.sprites.hazard :as hazard]
             [ssss-expressions.sprites.snake :as snake]
             [ssss-expressions.sprites.rat :as rat]))
 
@@ -56,22 +58,12 @@
 (defn update-level-01
   [state]
   (-> state
+      common/handle-removal-flags
       update-scene-sprites-with-context
       snake/handle-direction-input
       update-non-wrapped-non-squished-sprite-tweens
+      delay/update-delays
       qpcollision/update-collisions))
-
-(defn sprites
-  []
-  [(snake/player-snake [200 200])
-   (rat/rat [(+ (rand-int 66) 300) (+ (rand-int 100) 200)])
-   (rat/rat [(+ (rand-int 66) 300) (+ (rand-int 100) 200)])
-   (rat/rat [(+ (rand-int 66) 300) (+ (rand-int 100) 500)])
-   (rat/rat [(+ (rand-int 66) 300) (+ (rand-int 100) 500)])
-   (rat/rat [(+ (rand-int 66) 633) (+ (rand-int 100) 200)])
-   (rat/rat [(+ (rand-int 66) 633) (+ (rand-int 100) 200)])
-   (rat/rat [(+ (rand-int 66) 633) (+ (rand-int 100) 500)])
-   (rat/rat [(+ (rand-int 66) 633) (+ (rand-int 100) 500)])])
 
 (defn print-state
   [{:keys [current-scene] :as state} e]
@@ -95,25 +87,79 @@
     :non-collide-fn-b (fn [{:keys [current-animation] :as r} _]
                         (cond-> r
                           (= :wrapped current-animation)
-                          (qpsprite/set-animation :squished)
+                          (qpsprite/set-animation :squished))))])
 
-                          (and (zero? (reduce + (:vel r)))
-                               (not (#{:wrapped :squished} current-animation)))
-                          (assoc :vel [(- (rand-int 4) 2) (- (rand-int 4) 2)]))))])
+(defn tween-paths
+  []
+  [{:starting-pos [(* 0.5 (q/width)) -100]
+    :tweens [(qptween/->tween
+              :vel
+              4
+              :step-count 1
+              :update-fn common/tween-y-fn
+              :easing-fn qptween/sigmoidal-easing-fn)]}
+   {:starting-pos [(* 0.33 (q/width)) -100]
+    :tweens [(qptween/->tween
+              :vel
+              4
+              :step-count 10
+              :update-fn common/tween-y-fn
+              :easing-fn qptween/sigmoidal-easing-fn)]}
+   {:starting-pos [(* 0.66 (q/width)) -100]
+    :tweens [(qptween/->tween
+              :vel
+              4
+              :step-count 20
+              :update-fn common/tween-y-fn
+              :easing-fn qptween/sigmoidal-easing-fn)]}
+   ;; {:starting-pos [(* 0.66 (q/width)) 900]
+   ;;  :tweens [(qptween/->tween
+   ;;            :vel
+   ;;            -4
+   ;;            :step-count 20
+   ;;            :update-fn common/tween-y-fn
+   ;;            :easing-fn qptween/sigmoidal-easing-fn)]}
+   ;; {:starting-pos [-50 400]
+   ;;  :tweens [(qptween/->tween
+   ;;            :vel
+   ;;            4
+   ;;            :step-count 20
+   ;;            :update-fn common/tween-x-fn
+   ;;            :easing-fn qptween/sigmoidal-easing-fn)]}
+   ;; {:starting-pos [1100 400]
+   ;;  :tweens [(qptween/->tween
+   ;;            :vel
+   ;;            -4
+   ;;            :step-count 20
+   ;;            :update-fn common/tween-x-fn
+   ;;            :easing-fn qptween/sigmoidal-easing-fn)]}
+   ])
+
+(defn rats
+  [paths]
+  (for [{:keys [tweens starting-pos]} paths]
+    (-> (rat/rat starting-pos)
+        (assoc :tweens tweens))))
+
+(defn hazards
+  [paths]
+  (for [{:keys [starting-pos]} paths]
+    (hazard/hazard starting-pos)))
+
+(defn sprites
+  []
+  [(snake/player-snake [200 200])])
 
 (defn delays
   []
-  [])
-
-(defn paths
-  []
-  [])
+  [(delay/add-sprites-to-scene-delay (hazards (tween-paths)) 40)
+   (delay/add-sprites-to-scene-delay (rats (tween-paths)) (* 60 3))])
 
 (defn init
   []
   {:sprites (sprites)
+   :delays (delays)
    :draw-fn draw-level-01
    :update-fn update-level-01
    :key-pressed-fns [print-state]
-   :colliders (colliders)
-   :delays (delays)})
+   :colliders (colliders)})

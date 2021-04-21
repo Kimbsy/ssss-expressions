@@ -26,3 +26,26 @@
            [[x2 y1] [x2 y1]]
            [[x2 y2] [x1 y2]]
            [[x1 y2] [x1 y1]]])))
+
+(defn tween-x-fn
+  [[x y] d]
+  [(+ x d) y])
+(defn tween-y-fn
+  [[x y] d]
+  [x (+ y d)])
+(defn tween-x-yoyo-fn
+  [[x y] d]
+  [(- x d) y])
+(defn tween-y-yoyo-fn
+  [[x y] d]
+  [x (- y d)])
+
+(defn flag-for-removal
+  [s]
+  (assoc s :remove? true))
+
+(defn handle-removal-flags
+  [{:keys [current-scene] :as state}]
+  (update-in state [:scenes current-scene :sprites]
+             (fn [sprites]
+               (remove :remove? sprites))))

@@ -91,7 +91,7 @@
   {:sprite-group :player-snake
    :uuid (java.util.UUID/randomUUID)
    :pos pos
-   :vel [3 0]
+   :vel [0 3] ; apparently need some initial velocity, whatevs
    :rotation 90 ; start facing right
    :points []
    :update-fn update-player-snake
