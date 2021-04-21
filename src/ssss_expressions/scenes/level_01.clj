@@ -156,12 +156,23 @@
               :sprite-group :tooltip
               :color common/white)))
 
+(defn get-score
+  [{:keys [current-scene] :as state}]
+  (->> (get-in state [:scenes current-scene :sprites])
+       (map :current-animation)
+       (filter #{:wrapped :squished})
+       count))
+
 (defn finish
-  [state]
-  (qpscene/transition state :scoring
-                      :transition-length 80
-                      :init-fn (fn [state]
-                                 (update state :held-keys empty))))
+  [{:keys [prev-level] :as state}]
+  (-> state
+      (assoc-in [:scores prev-level] (get-score state))
+      (qpscene/transition :scoring
+                          :transition-length 80
+                          :init-fn (fn [state]
+                                     (-> state
+                                         (update :held-keys empty)
+                                         (assoc :next-scene :level-02))))))
 
 (defn delays
   []

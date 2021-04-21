@@ -26,7 +26,7 @@
   )
 
 (defn rat
-  [pos ]
+  [pos]
   (->  (qpsprite/animated-sprite
         :rat
         pos

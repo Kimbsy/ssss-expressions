@@ -231,7 +231,10 @@
   (qpscene/transition state :level-01
                       :transition-length 80
                       :init-fn (fn [state]
-                                 state)))
+                                 (qpsound/stop-music)
+                                 (qpsound/loop-music "music/Level_1.wav")
+                                 (-> state
+                                     (assoc :prev-level :level-01)))))
 
 (defn delays
   []

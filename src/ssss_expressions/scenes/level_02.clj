@@ -7,11 +7,12 @@
             [quip.utils :as qpu]
             [ssss-expressions.common :as common]
             [ssss-expressions.delay :as delay]
+            [ssss-expressions.scenes.scoring :as scoring]
             [ssss-expressions.sprites.hazard :as hazard]
             [ssss-expressions.sprites.snake :as snake]
             [ssss-expressions.sprites.rat :as rat]))
 
-(defn draw-level-01
+(defn draw-level-02
   [state]
   (qpu/background common/grey)
   (qpscene/draw-scene-sprites state))
@@ -55,7 +56,7 @@
     (assoc-in state [:scenes current-scene :sprites]
               (concat cleaned-sprites wrapped))))
 
-(defn update-level-01
+(defn update-level-02
   [state]
   (-> state
       common/handle-removal-flags
@@ -130,16 +131,36 @@
   []
   [(snake/player-snake [120 225])])
 
+(defn get-score
+  [{:keys [current-scene] :as state}]
+  (->> (get-in state [:scenes current-scene :sprites])
+       (map :current-animation)
+       (filter #{:wrapped :squished})
+       count))
+
+(defn finish
+  [{:keys [prev-level] :as state}]
+  (-> state
+      (assoc-in [:scores prev-level] (get-score state))
+      (qpscene/transition :scoring
+                          :transition-length 80
+                          :init-fn (fn [state]
+                                     (-> state
+                                         (assoc-in [:scenes :scoring] (scoring/init))
+                                         (update :held-keys empty)
+                                         (assoc :next-scene :level-03))))))
+
 (defn delays
   []
   [(delay/add-sprites-to-scene-delay (* 60 2) (hazards (tween-paths)))
-   (delay/add-sprites-to-scene-delay (* 60 4) (rats (tween-paths)))])
+   (delay/add-sprites-to-scene-delay (* 60 4) (rats (tween-paths)))
+   (delay/->delay (* 60 10) finish)])
 
 (defn init
   []
   {:sprites (sprites)
    :delays (delays)
-   :draw-fn draw-level-01
-   :update-fn update-level-01
+   :draw-fn draw-level-02
+   :update-fn update-level-02
    :key-pressed-fns [print-state]
    :colliders (colliders)})

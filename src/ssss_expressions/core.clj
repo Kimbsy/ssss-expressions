@@ -10,6 +10,7 @@
             [ssss-expressions.scenes.intro :as intro]
             [ssss-expressions.scenes.level-01 :as level-01]
             [ssss-expressions.scenes.level-02 :as level-02]
+            [ssss-expressions.scenes.level-03 :as level-03]
             [ssss-expressions.scenes.menu :as menu]
             [ssss-expressions.scenes.outro :as outro]
             [ssss-expressions.scenes.scoring :as scoring]))
@@ -18,7 +19,9 @@
   []
   (qpsound/loop-music "music/Menu_Music_w_breaks.wav")
   {:default-font (q/create-font "font/UbuntuMono-Regular.ttf" qpu/default-text-size)
-   :giant-font   (q/create-font "font/UbuntuMono-Regular.ttf" 250)})
+   :giant-font   (q/create-font "font/UbuntuMono-Regular.ttf" 250)
+   :scores {}
+   :prev-level :none})
 
 (defn init-scenes
   []
@@ -26,6 +29,7 @@
    :intro    (intro/init)
    :level-01 (level-01/init)
    :level-02 (level-02/init)
+   :level-03 (level-03/init)
    :outro    (outro/init)
    :credits  (credits/init)
    :scoring  (scoring/init)})
@@ -33,7 +37,7 @@
 (defn cleanup
   [state]
   (qpsound/stop-music)
-  #_(System/exit 0))
+  (System/exit 0))
 
 (def ssss-expressions-game
   (qp/game
