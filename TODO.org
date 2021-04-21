@@ -1,5 +1,7 @@
 * Things to do:
 ** TODO create between-level score scene
+** TODO ability to reset levels?
+*** when do you display that tooltip?
 ** TODO create outro cutscene
 ** TODO create credits scene
 ** TODO sync menu snakes to menu music
