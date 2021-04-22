@@ -80,7 +80,7 @@
     qpcollision/identity-collide-fn
     (fn [{:keys [current-animation] :as r} _]
       (cond-> r
-        (= :scurry current-animation)
+        (#{:scurry :scurry-flipped} current-animation)
         (->
          (qpsprite/set-animation :wrapped)
          (assoc :vel [0 0]))))

@@ -1,7 +1,4 @@
 * Things to do:
-** TODO flipped rat sprite for when (< 90 rotation 270)
-** TODO ability to reset levels?
-*** when do you display that tooltip?
 ** TODO create outro cutscene
 ** TODO create credits scene
 ** TODO sync menu snakes to menu music
@@ -12,6 +9,8 @@
 *** DONE levels
 *** TODO outro
 *** TODO credits
+** DONE flipped rat sprite for when (< 90 rotation 270)
+*** just check for negative x velocity, close enough
 ** DONE extend patterns
 *** DONE level 1
 *** DONE level 2

@@ -101,13 +101,7 @@
      (qpu/stroke common/grey)
      (qpu/fill common/grey)
      (q/rect 2 -14 2 2)
-     (q/rect -4 -14 2 2)))
-
-  ;; draw the body segments
-  ;; (qpu/stroke qpu/red)
-  ;; (doseq [[a b] (partition 2 1 (conj body pos))]
-  ;;   (q/line a b))
-  )
+     (q/rect -4 -14 2 2))))
 
 (defn player-snake
   [[x y :as pos]]
@@ -119,7 +113,6 @@
    :points []
    :update-fn update-player-snake
    :draw-fn draw-player-snake
-   :bounds-fn (constantly false) ; ... this is gonna take some thinking
    :body (apply conj clojure.lang.PersistentQueue/EMPTY
                 initial-body)})
 
