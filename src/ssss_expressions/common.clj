@@ -49,3 +49,14 @@
   (update-in state [:scenes current-scene :sprites]
              (fn [sprites]
                (remove :remove? sprites))))
+
+(defn unclick-all-buttons
+  [{:keys [current-scene] :as state}]
+  (let [sprites     (get-in state [:scenes current-scene :sprites])
+        buttons     (filter #(#{:button} (:sprite-group %)) sprites)
+        non-buttons (remove #(#{:button} (:sprite-group %)) sprites)]
+    (-> state
+        (assoc-in [:scenes current-scene :sprites]
+                  (concat non-buttons
+                          (map #(assoc % :held? false)
+                               buttons))))))

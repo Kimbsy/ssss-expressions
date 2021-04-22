@@ -31,14 +31,14 @@
                       :init-fn (fn [state]
                                  (qpsound/stop-music)
                                  (qpsound/loop-music "music/Chansssse_Encounter.wav")
-                                 state)))
+                                 (common/unclick-all-buttons state))))
 
 (defn on-click-credits
   [state e]
   (qpscene/transition state :credits
                       :transition-length 30
                       :init-fn (fn [state]
-                                 state)))
+                                 (common/unclick-all-buttons state))))
 
 (defn on-click-quit
   [state e]

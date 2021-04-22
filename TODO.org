@@ -1,5 +1,4 @@
 * Things to do:
-** TODO create credits scene
 ** TODO sync menu snakes to menu music
 *** initial delay + yoyoing tween of specified step-count
 ** TODO add music
@@ -8,6 +7,7 @@
 *** DONE levels
 *** TODO outro
 *** TODO credits
+** DONE create credits scene
 ** DONE create outro cutscene
 ** DONE flipped rat sprite for when (< 90 rotation 270)
 *** just check for negative x velocity, close enough
