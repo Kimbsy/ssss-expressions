@@ -12,14 +12,6 @@
             [ssss-expressions.sprites.rat :as rat]
             [ssss-expressions.sprites.box :as box]))
 
-(defn lid-move
-  [back?]
-  (qptween/->tween
-   :pos
-   (if back? -200 200)
-   :step-count 40
-   :update-fn common/tween-x-fn))
-
 (defn draw-scoring
   [state]
   (qpu/background common/grey)
@@ -46,28 +38,6 @@
                   (* 0.6 (q/height))])
    (box/box-lid [(* 0.5 (q/width))
                  (* 0.4325 (q/height))])])
-
-(defn open-box
-  [{:keys [current-scene] :as state}]
-  (update-in state [:scenes current-scene :sprites]
-             (fn [sprites]
-               (map (fn [s]
-                      (if (= :box-lid (:sprite-group s))
-                        (-> s
-                            (qptween/add-tween (lid-move false)))
-                        s))
-                    sprites))))
-
-(defn close-box
-  [{:keys [current-scene] :as state}]
-  (update-in state [:scenes current-scene :sprites]
-             (fn [sprites]
-               (map (fn [s]
-                      (if (= :box-lid (:sprite-group s))
-                        (-> s
-                            (qptween/add-tween (lid-move true)))
-                        s))
-                    sprites))))
 
 (defn rand-rat
   []
@@ -97,15 +67,15 @@
                                  (qpsound/loop-music (case next-scene
                                                        :level-02 "music/Level_2.wav"
                                                        :level-03 "music/Level_3.wav"
-                                                       "music/Romantic_and_Triumphant_Victory.wav"))
+                                                       "music/Chansssse_Encounter.wav"))
                                  (-> state
                                      (assoc :prev-level next-scene)))))
 
 (defn delays
   []
-  [(delay/->delay 50 open-box)
+  [(delay/->delay 50 box/open-box)
    (delay/->delay 100 rats)
-   (delay/->delay 200 close-box)
+   (delay/->delay 200 box/close-box)
    (delay/->delay 300 finish)])
 
 (defn colliders
