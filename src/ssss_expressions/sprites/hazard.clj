@@ -25,7 +25,7 @@
    :on-complete-fn common/flag-for-removal))
 
 (defn draw-hazard
-  [{[x y] :pos :keys [pos alpha]}]
+  [{[x y] :pos :keys [pos alpha palette]}]
   (let [up [0 (- h2)]
         br (qpu/rotate-vector up 120)
         bl (qpu/rotate-vector br 120)
@@ -33,18 +33,25 @@
         [x2 y2] (map + pos br)
         [x3 y3] (map + pos bl)]
     (q/no-stroke)
-    (qpu/fill (conj common/dark-blue alpha))
+    (qpu/fill (conj (case palette
+                      :red common/pink
+                      :blue common/dark-blue)
+                    alpha))
     (q/triangle x1 y1 x2 y2 x3 y3)
-    (qpu/fill (conj common/light-blue alpha))
+    (qpu/fill (conj (case palette
+                      :red common/highlight-pink
+                      :blue common/light-blue)
+                    alpha))
     (q/rect (- x 2) (- y 20) 4 24 2)
     (q/rect (- x 2) (+ y 10) 4 4 2)))
 
 (defn hazard
-  [incoming-pos]
+  [incoming-pos & {:keys [palette] :or {palette :blue}}]
   {:sprite-group :hazard
    :pos (bounded-pos incoming-pos)
    :vel [0 0]
    :alpha 255
+   :palette palette
    :rotation 0
    :points []
    :update-fn identity

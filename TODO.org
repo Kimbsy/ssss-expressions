@@ -1,20 +1,21 @@
 * Things to do:
+** TODO flipped rat sprite for when (< 90 rotation 270)
 ** TODO ability to reset levels?
 *** when do you display that tooltip?
 ** TODO create outro cutscene
 ** TODO create credits scene
 ** TODO sync menu snakes to menu music
 *** initial delay + yoyoing tween of specified step-count
-** TODO extend patterns
-*** TODO level 1
-*** TODO level 2
-*** TODO level 3
 ** TODO add music
 *** DONE menu
 *** DONE intro
 *** DONE levels
 *** TODO outro
 *** TODO credits
+** DONE extend patterns
+*** DONE level 1
+*** DONE level 2
+*** DONE level 3
 ** DONE create between-level score scene
 ** DONE get rats moving
 *** DONE get them stopping when caught

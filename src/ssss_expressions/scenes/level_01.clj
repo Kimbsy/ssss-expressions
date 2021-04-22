@@ -92,27 +92,72 @@
 
 (defn tween-paths
   []
-  [{:starting-pos [(* 0.5 (q/width)) -100]
-    :tweens [(qptween/->tween
-              :vel
-              4
-              :step-count 1
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 0.33 (q/width)) -100]
-    :tweens [(qptween/->tween
-              :vel
-              4
-              :step-count 10
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 0.66 (q/width)) -100]
-    :tweens [(qptween/->tween
-              :vel
-              4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}])
+  [;; Round 1
+   [{:starting-pos [(* 0.33 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 1
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.5 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 10
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.66 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   ;; Round 2
+   [{:starting-pos [-100 (* 0.33 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 1
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.5 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 10
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.66 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   ;; Round 3
+   [{:starting-pos [(* 1.1 (q/width)) (* 0.33 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 1
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 1.1 (q/width)) (* 0.5 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 10
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 1.1 (q/width)) (* 0.66 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]])
 
 (defn rats
   [paths]
@@ -191,7 +236,7 @@
                                         (* 0.3 (q/height))]
                                        :sprite-group :tooltip
                                        :color common/white)])
-   (delay/add-sprites-to-scene-delay 700 (hazards (tween-paths)))
+   (delay/add-sprites-to-scene-delay 700 (hazards (nth (tween-paths) 0)))
    (delay/add-sprites-to-scene-delay 800
                                      [(qpsprite/text-sprite
                                        "Time to get in position!"
@@ -199,9 +244,20 @@
                                         (* 0.4 (q/height))]
                                        :sprite-group :tooltip
                                        :color common/white)])
-   (delay/add-sprites-to-scene-delay 1000 (rats (tween-paths)))
+   (delay/add-sprites-to-scene-delay 1000 (rats (nth (tween-paths) 0)))
    (delay/->delay 1000 remove-tooltips)
-   (delay/->delay 1600 finish)])
+
+   (delay/add-sprites-to-scene-delay (+ 1000 (* 60 6))
+                                     (hazards (nth (tween-paths) 1)))
+   (delay/add-sprites-to-scene-delay (+ 1000 (* 60 10))
+                                     (rats (nth (tween-paths) 1)))
+
+   (delay/add-sprites-to-scene-delay (+ 1000 (* 60 16))
+                                     (hazards (nth (tween-paths) 2)))
+   (delay/add-sprites-to-scene-delay (+ 1000 (* 60 20))
+                                     (rats (nth (tween-paths) 2)))
+
+   (delay/->delay (+ 1000 (* 60 26)) finish)])
 
 (defn init
   []

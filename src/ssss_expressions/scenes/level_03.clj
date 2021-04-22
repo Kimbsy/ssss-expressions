@@ -93,52 +93,332 @@
 
 (defn tween-paths
   []
-  [{:starting-pos [(* 0.51 (q/width)) (* 1.1 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 0.52 (q/width)) (* 1.1 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 0.53 (q/width)) (* 1.1 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 0.54 (q/width)) (* 1.1 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 0.55 (q/width)) (* 1.1 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}])
+  [;; Round 1
+   [{:starting-pos [(* 0.66 (q/width)) -100]
+     :starting-vel [0 4]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 200
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 200
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.8 (q/width)) -100]
+     :starting-vel [0 4]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 220
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 220
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.33 (q/width)) (* 1.1 (q/height))]
+     :starting-vel [0 -4]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 200
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 200
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.2 (q/width)) (* 1.1 (q/height))]
+     :starting-vel [0 -4]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 220
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 220
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   ;; Round 2
+   [{:starting-pos [(* 0.8 (q/width)) -100]
+     :starting-vel [0 4]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 400
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 400
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 700
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 700
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 1000
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 1000
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.2 (q/width)) (+ 100 (q/height))]
+     :starting-vel [0 -4]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 400
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 400
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 700
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 700
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 1000
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 1000
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.2 (q/height))]
+     :starting-vel [4 0]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 400
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 400
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 700
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 700
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 1000
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 1000
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(+ 100 (q/width)) (* 0.8 (q/height))]
+     :starting-vel [-4 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 400
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 400
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 700
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 700
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               -4
+               :step-count 1000
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)
+              (qptween/->tween
+               :vel
+               4
+               :step-count 1000
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   ;; Round 3
+   [{:starting-pos [(* 0.1 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 1
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.2 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 60
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.3 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 120
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.4 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 180
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.5 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 240
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.6 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 300
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.7 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 360
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.8 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 420
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.9 (q/width)) -100]
+     :starting-vel [0 0]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 480
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   ;; Round 4
+   [{:starting-pos [(* 1.1 (q/width)) (- (* 0.3 (q/height)) 50)]
+     :starting-vel [-2 0]
+     :tweens [(qptween/->tween
+               :pos
+               100
+               :step-count 40
+               :yoyo? true
+               :update-fn common/tween-y-fn
+               :yoyo-update-fn common/tween-y-yoyo-fn
+               :repeat-times ##Inf)]}
+    {:starting-pos [-100 (- (* 0.6 (q/height)) 50)]
+     :starting-vel [2 0]
+     :tweens [(qptween/->tween
+               :pos
+               100
+               :step-count 40
+               :yoyo? true
+               :update-fn common/tween-y-fn
+               :yoyo-update-fn common/tween-y-yoyo-fn
+               :repeat-times ##Inf)]}
+    {:starting-pos [(- (* 0.5 (q/width)) 50) -100]
+     :starting-vel [0 2]
+     :tweens [(qptween/->tween
+               :pos
+               100
+               :step-count 40
+               :yoyo? true
+               :update-fn common/tween-x-fn
+               :yoyo-update-fn common/tween-x-yoyo-fn
+               :repeat-times ##Inf)]}]])
 
 (defn rats
   [paths]
-  (for [{:keys [tweens starting-pos]} paths]
+  (for [{:keys [tweens starting-pos starting-vel]} paths]
     (-> (rat/rat starting-pos)
+        (assoc :vel starting-vel)
         (assoc :tweens tweens))))
 
 (defn hazards
   [paths]
   (for [{:keys [starting-pos]} paths]
-    (hazard/hazard starting-pos)))
+    (hazard/hazard starting-pos :palette :red)))
 
 (defn sprites
   []
@@ -165,9 +445,29 @@
 
 (defn delays
   []
-  [(delay/add-sprites-to-scene-delay (* 60 2) (hazards (tween-paths)))
-   (delay/add-sprites-to-scene-delay (* 60 4) (rats (tween-paths)))
-   (delay/->delay (* 60 10) finish)])
+  [(delay/add-sprites-to-scene-delay (* 60 2) (hazards (nth (tween-paths) 0)))
+   (delay/add-sprites-to-scene-delay (* 60 6) (rats (nth (tween-paths) 0)))
+
+   (delay/add-sprites-to-scene-delay (* 60 12) (hazards (nth (tween-paths) 1)))
+   (delay/add-sprites-to-scene-delay (* 60 16) (rats (nth (tween-paths) 1)))
+
+   (delay/add-sprites-to-scene-delay (* 60 22) (hazards (nth (tween-paths) 2)))
+   (delay/add-sprites-to-scene-delay (* 60 26) (rats (nth (tween-paths) 2)))
+
+   (delay/add-sprites-to-scene-delay (* 60 32) (hazards (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (* 60 36) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 10 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 20 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 30 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 40 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 50 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 60 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 70 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 80 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 90 (* 60 36)) (rats (nth (tween-paths) 3)))
+   (delay/add-sprites-to-scene-delay (+ 100 (* 60 36)) (rats (nth (tween-paths) 3)))
+
+   (delay/->delay (* 60 50) finish)])
 
 (defn init
   []

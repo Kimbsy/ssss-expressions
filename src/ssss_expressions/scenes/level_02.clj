@@ -93,27 +93,90 @@
 
 (defn tween-paths
   []
-  [{:starting-pos [(* 0.66 (q/width)) (* 1.1 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-y-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [-50 (* 0.5 (q/width))]
-    :tweens [(qptween/->tween
-              :vel
-              4
-              :step-count 20
-              :update-fn common/tween-x-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
-   {:starting-pos [(* 1.1 (q/width)) (* 0.5 (q/height))]
-    :tweens [(qptween/->tween
-              :vel
-              -4
-              :step-count 20
-              :update-fn common/tween-x-fn
-              :easing-fn qptween/sigmoidal-easing-fn)]}
+  [[{:starting-pos [(* 0.66 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.8 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.66 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.8 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   [{:starting-pos [(* 0.33 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.2 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 1.1 (q/width)) (* 0.66 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 1.1 (q/width)) (* 0.8 (q/height ))]
+     :tweens [(qptween/->tween
+               :vel
+               -4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
+   [{:starting-pos [(* 0.4 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [(* 0.6 (q/width)) -100]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-y-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.4 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}
+    {:starting-pos [-100 (* 0.6 (q/height))]
+     :tweens [(qptween/->tween
+               :vel
+               4
+               :step-count 20
+               :update-fn common/tween-x-fn
+               :easing-fn qptween/sigmoidal-easing-fn)]}]
    ])
 
 (defn rats
@@ -152,9 +215,19 @@
 
 (defn delays
   []
-  [(delay/add-sprites-to-scene-delay (* 60 2) (hazards (tween-paths)))
-   (delay/add-sprites-to-scene-delay (* 60 4) (rats (tween-paths)))
-   (delay/->delay (* 60 10) finish)])
+  [(delay/add-sprites-to-scene-delay (* 60 2) (hazards (nth (tween-paths) 0)))
+   (delay/add-sprites-to-scene-delay (* 60 6) (rats (nth (tween-paths) 0)))
+
+   (delay/add-sprites-to-scene-delay (* 60 12) (hazards (nth (tween-paths) 1)))
+   (delay/add-sprites-to-scene-delay (* 60 16) (rats (nth (tween-paths) 1)))
+
+   (delay/add-sprites-to-scene-delay (* 60 22) (hazards (nth (tween-paths) 0)))
+   (delay/add-sprites-to-scene-delay (* 60 26) (rats (nth (tween-paths) 0)))
+
+   (delay/add-sprites-to-scene-delay (* 60 30) (hazards (nth (tween-paths) 2)))
+   (delay/add-sprites-to-scene-delay (* 60 34) (rats (nth (tween-paths) 2)))
+
+   (delay/->delay (* 60 40) finish)])
 
 (defn init
   []
