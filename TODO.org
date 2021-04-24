@@ -1,12 +1,12 @@
 * Things to do:
-** TODO sync menu snakes to menu music
+** DONE sync menu snakes to menu music
 *** initial delay + yoyoing tween of specified step-count
-** TODO add music
+** DONE add music
 *** DONE menu
 *** DONE intro
 *** DONE levels
-*** TODO outro
-*** TODO credits
+*** DONE outro
+*** DONE credits
 ** DONE create credits scene
 ** DONE create outro cutscene
 ** DONE flipped rat sprite for when (< 90 rotation 270)

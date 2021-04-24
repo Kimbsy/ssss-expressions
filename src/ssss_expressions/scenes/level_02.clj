@@ -66,13 +66,6 @@
       delay/update-delays
       qpcollision/update-collisions))
 
-(defn print-state
-  [{:keys [current-scene] :as state} e]
-  (when (= 32 (:key-code e))
-    (let [sprites (get-in state [:scenes current-scene :sprites])]
-      (prn (:body (first sprites)))))
-  state)
-
 (defn colliders
   []
   [(qpcollision/collider
@@ -235,5 +228,4 @@
    :delays (delays)
    :draw-fn draw-level-02
    :update-fn update-level-02
-   :key-pressed-fns [print-state]
    :colliders (colliders)})
